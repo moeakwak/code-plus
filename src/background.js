@@ -11,7 +11,7 @@ chrome.action.onClicked.addListener((tab) => {
   console.log("click", tab);
 
   // for acwing
-  let acwing_pattern = /.*www.acwing.com\/problem\/content\/description\/(\d+).*/;
+  let acwing_pattern = /.*www.acwing.com\/problem\/content(\/description)?\/(\d+).*/;
   if (acwing_pattern.test(tab.url)) {
     console.log("inject to", tab.url);
     chrome.scripting.executeScript({

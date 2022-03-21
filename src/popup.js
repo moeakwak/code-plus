@@ -10,5 +10,5 @@ $("#info").text("popup ok");
 chrome.runtime.sendMessage({
   type: "popup-ready"
 }, (response) => {
-  $("#info").text(JSON.stringify(response));
+  $("#info").text(JSON.stringify(response, null, 4));
 });

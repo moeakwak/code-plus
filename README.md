@@ -1,21 +1,20 @@
 # <img src="public/icons/icon_48.png" width="45" align="left"> Code Plus
 
-My Chrome Extension
+CodePlus is a chrome extension to help you save programming record to Notion.
 
-## Features
+Currently, CodePlus supports these platforms:
 
-- Feature 1
-- Feature 2
+- AcWing
+- LeetCode
 
-## Install
+## Start up
 
-[**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
+TBD
 
-## Contribution
+## How to use
 
-Suggestions and pull requests are welcomed!.
+You can open the popup by clicking the icon manually.
 
----
+## develop
 
-This project was bootstrapped with [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
-
+To build the extension, see [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)'s description.

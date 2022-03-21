@@ -1,21 +1,37 @@
-'use strict';
+"use strict";
 
-// With background scripts you can communicate with popup
-// and contentScript files.
-// For more information on background script,
-// See https://developer.chrome.com/extensions/background_pages
+console.log("bg ok");
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'GREETINGS') {
-    const message = `Hi ${
-      sender.tab ? 'Con' : 'Pop'
-    }, my name is Bac. I am from Background. It's great to hear from you.`;
+chrome.runtime.onInstalled.addListener(() => {
+  // TODO: set Notion config
+});
 
-    // Log message coming from the `request` parameter
-    console.log(request.payload.message);
-    // Send a response message
-    sendResponse({
-      message,
+// inject content script when click the icon
+chrome.action.onClicked.addListener((tab) => {
+  console.log("click", tab);
+
+  // for acwing
+  let acwing_pattern = /.*www.acwing.com\/problem\/content\/description\/(\d+).*/;
+  if (acwing_pattern.test(tab.url)) {
+    console.log("inject to", tab.url);
+    chrome.scripting.executeScript({
+      files: ["acwing.js"],
+      target: { tabId: tab.id },
     });
+  }
+})
+
+let latest_info = {};
+
+// open page after getting info
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.log(request);
+  if (request.type == "info") {
+    latest_info = request.data;
+    chrome.tabs.create({
+      url: "popup.html"
+    });
+  } else if (request.type == "popup-ready") {
+    sendResponse(latest_info);
   }
 });

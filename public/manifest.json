@@ -13,21 +13,26 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Code Plus",
-    "default_popup": "popup.html"
+    "default_title": "CodePlus"
+    // ,
+    // "default_popup": "popup.html"
   },
   "permissions": [
-    "storage"
-  ],
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "run_at": "document_idle",
-      "js": [
-        "contentScript.js"
-      ]
-    }
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs"
   ]
+  // ,
+  // "content_scripts": [
+  //   {
+  //     "matches": [
+  //       "<all_urls>"
+  //     ],
+  //     "run_at": "document_idle",
+  //     "js": [
+  //       "contentScript.js"
+  //     ]
+  //   }
+  // ]
 }

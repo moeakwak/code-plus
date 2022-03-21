@@ -1,6 +1,6 @@
 "use strict";
 
-import "./popup.css";
+// import "./popup.css";
 
 import $ from "jquery";
 

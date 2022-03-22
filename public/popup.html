@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>CodePlus</title>
     <!-- <link rel="stylesheet" href="popup.css" /> -->
-</head>
-<body>
-  <div class="app">
-    <!-- <p class="title">Chrome Extension is Ready!</p>
+  </head>
+  <body>
+    <div class="app">
+      <!-- <p class="title">Chrome Extension is Ready!</p>
     <p class="subtitle">Start by updating <code>popup.html</code></p> -->
-    <textarea id="info" style="width: 100%; height: 300px;"></textarea>
-  </div>
+      <textarea id="info" style="width: 100%; height: 300px"></textarea>
+      <div>
+        <button id="send">send to notion</button>
+        <span>Status:</span>
+          <input type="radio" name="status" value="AC" checked>AC
+          <input type="radio" name="status" value="WA">WA
+          <input type="radio" name="status" value="Todo">Todo
+          <input type="radio" name="status" value="other">other
+          <input type="text" name="status-other">
+      </div>
+    </div>
 
-  <script src="popup.js"></script>
+    <script src="popup.js"></script>
 
-  <!--
+    <!--
     This HTML file opens when you click on icon from the toolbar.
 
     To begin the development, run `npm run watch`.
     To create a production bundle, use `npm run build`.
-  -->
-</body>
+  --></body>
 </html>

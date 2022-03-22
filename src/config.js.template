@@ -1,0 +1,5 @@
+export const config = {
+  notion_database_id: "",
+  notion_secret: "secret_xxx",
+  cors_proxy: "http://localhost:7700/",
+};

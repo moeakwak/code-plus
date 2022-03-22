@@ -22,7 +22,8 @@
     "activeTab",
     "scripting",
     "tabs"
-  ]
+  ],
+  "host_permissions": ["https://*/*"]
   // ,
   // "content_scripts": [
   //   {

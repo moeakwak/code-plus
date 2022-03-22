@@ -1,9 +1,13 @@
 "use strict";
 
-console.log("bg ok");
+import { config } from "./config.js";
+
+console.log("bg ok", config);
+
+// TODO: set Notion config at first install
+chrome.storage.local.set(config, () => console.log("bg set", config));
 
 chrome.runtime.onInstalled.addListener(() => {
-  // TODO: set Notion config
 });
 
 // inject content script when click the icon

@@ -1,9 +1,7 @@
 "use strict";
 
-// import "./popup.css";
-
 import $ from "jquery";
-import { retrieveDatabase, addPage } from "./notion.js";
+import { addPage } from "./notion.js";
 
 $("#info").text("popup ok");
 

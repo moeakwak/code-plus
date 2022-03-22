@@ -1,66 +1,13 @@
 // import exp from "constants";
 import $ from "jquery";
-// import { markdownToBlocks } from "@instantish/martian";
 
-import { markdownToBlocks } from "../lib/martian"
+import { markdownToBlocks } from "../lib/martian";
+// TODO: markdownToBlocks support inline math
 
 async function getOption(key) {
   let result = await chrome.storage.local.get([key]);
   console.log("getOption", result);
   return result[key];
-}
-
-function makeBlock(type, content, args = {}) {
-  let block = {};
-  if (type == "h2") {
-    block = {
-      type: "heading_2",
-      heading_2: {
-        rich_text: [
-          {
-            type: "text",
-            text: {
-              content: content,
-              link: null,
-            },
-          },
-        ],
-        color: args.color || "default",
-      },
-    };
-  } else if (type == "code") {
-    block = {
-      type: "code",
-      code: {
-        rich_text: [
-          {
-            type: "text",
-            text: {
-              content: content,
-            },
-          },
-        ],
-        language: args.language || "plain text",
-      },
-    };
-  } else if (type == "p") {
-    block = {
-      type: "paragraph",
-      paragraph: {
-        rich_text: [
-          {
-            type: "text",
-            text: {
-              content: content,
-              link: null,
-            },
-          },
-        ],
-        color: args.color || "default",
-      },
-    };
-  }
-  return block;
 }
 
 export async function retrieveDatabase() {
@@ -80,7 +27,7 @@ export async function retrieveDatabase() {
   };
 
   $.ajax(settings).done(function (response) {
-    console.log(response);
+    console.log(response);  // This contains useful information like Database properties
   });
 }
 
@@ -122,14 +69,15 @@ export async function addPage(pageInfo, content) {
         },
       },
     },
+    // children: markdownToBlocks()
     children: [
-      makeBlock("h2", "描述"),
+      ...markdownToBlocks("## 描述"),
       ...markdownToBlocks(pageInfo.description),
-      makeBlock("h2", "代码"),
-      makeBlock("code", pageInfo.code, { language: pageInfo.code_language }),
-      makeBlock("h2", "思路"),
-      makeBlock("p", content || "TBD"),
-    ],
+      ...markdownToBlocks("## 代码"),
+      ...markdownToBlocks("```" + pageInfo.code_language + "\n" + pageInfo.code + "```"),
+      ...markdownToBlocks("## 思路"),
+      ...markdownToBlocks(content || "TBD"),
+    ]
   };
 
   const settings = {

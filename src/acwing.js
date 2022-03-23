@@ -17,7 +17,7 @@ let id = full_title.match(title_regex)[1].trim();
 let title = full_title.match(title_regex)[2].trim();
 let description = html2md($("[data-tab='preview-tab-content']").html(), from);
 let code = "";
-$("div[class='ace_layer ace_text-layer']")
+$("#code_editor > div.ace_scroller > div > div.ace_layer.ace_text-layer")
   .children()
   .each(function () {
     code += $(this).text() + "\n";

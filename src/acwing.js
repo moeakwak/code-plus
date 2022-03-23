@@ -7,7 +7,7 @@ import { html2md } from "./utils.js";
 
 console.log("CodePlus acwing ok");
 
-let from = "acwing";
+let from = "AcWing";
 let url = window.location.href;
 let title_regex = /(\d+)\.(.*)/;
 let full_title = $("div[class='nice_font problem-content-title']")

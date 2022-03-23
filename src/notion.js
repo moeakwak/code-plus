@@ -45,15 +45,16 @@ export async function createPage(
   let page_blocks = [];
   if (await getOption("add_description_to_page"))
     page_blocks = page_blocks.concat(
-      markdownToBlocks("## Description"),
+      markdownToBlocks("## 描述"),
       markdownToBlocks(pageInfo.description)
     );
+  console.log("```" + pageInfo.code_language + "\n" + pageInfo.code + "```");
   page_blocks = page_blocks.concat(
-    markdownToBlocks("## Code"),
+    markdownToBlocks("## 代码"),
     markdownToBlocks(
       "```" + pageInfo.code_language + "\n" + pageInfo.code + "```"
     ),
-    markdownToBlocks("## Idea"),
+    markdownToBlocks("## 思路"),
     markdownToBlocks(content || "TBD")
   );
 
@@ -111,6 +112,7 @@ export async function createPage(
       "Notion-Version": "2022-02-22",
       "Content-Type": "application/json",
       Authorization: "Bearer " + (await getOption("notion_secret")),
+      ...((await getOption("cors_proxy_extra_header")) || {})
     },
     processData: false,
     data: JSON.stringify(data),

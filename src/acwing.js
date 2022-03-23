@@ -8,6 +8,7 @@ import { html2md } from "./utils.js";
 console.log("CodePlus acwing ok");
 
 let from = "acwing";
+let url = window.location.href;
 let title_regex = /(\d+)\.(.*)/;
 let full_title = $("div[class='nice_font problem-content-title']")
   .text()
@@ -34,8 +35,9 @@ let difficulty = $(
   .text()
   .trim();
 
-let data = {
+let info = {
   from,
+  url,
   id,
   title,
   full_title,
@@ -46,9 +48,9 @@ let data = {
   tags,
 };
 
-console.log("CodePlus grabbed", data);
+console.log("CodePlus grabbed info", info);
 
 chrome.runtime.sendMessage({
   type: "info",
-  data,
+  data: info,
 });

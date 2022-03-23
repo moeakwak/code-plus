@@ -1,39 +1,37 @@
 "use strict";
 
 import { config } from "./config.js";
-
-console.log("bg ok", config);
+import { createPage } from "./notion.js";
 
 // TODO: set Notion config at first install
-chrome.storage.local.set(config, () => console.log("bg set", config));
+chrome.storage.local.set(config, () =>
+  console.log("background: ready", config)
+);
 
-chrome.runtime.onInstalled.addListener(() => {
-});
+// chrome.runtime.onInstalled.addListener(() => {});
 
 // inject content script when click the icon
 chrome.action.onClicked.addListener((tab) => {
-  console.log("click", tab);
-
   // for acwing
-  let acwing_pattern = /.*www.acwing.com\/problem\/content(\/description)?\/(\d+).*/;
+  let acwing_pattern =
+    /.*www.acwing.com\/problem\/content(\/description)?\/(\d+).*/;
   if (acwing_pattern.test(tab.url)) {
-    console.log("inject to", tab.url);
+    console.log("background: inject to", tab);
     chrome.scripting.executeScript({
       files: ["acwing.js"],
       target: { tabId: tab.id },
     });
   }
-})
+});
 
 let latest_info = {};
 
-// open page after getting info
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log(request);
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+  console.log("background recv message", request);
   if (request.type == "info") {
     latest_info = request.data;
     chrome.tabs.create({
-      url: "popup.html"
+      url: "popup.html",
     });
   } else if (request.type == "popup-ready") {
     sendResponse(latest_info);

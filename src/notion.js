@@ -27,17 +27,26 @@ export async function retrieveDatabase() {
   };
 
   $.ajax(settings).done(function (response) {
-    console.log(response);  // This contains useful information like Database properties
+    console.log(response); // This contains useful information like Database properties
   });
 }
 
-export async function addPage(pageInfo, content) {
+/**
+ * call notion api to create a new page
+ * @param {Object} pageInfo grabbed info object
+ * @param {String} content 
+ */
+export async function createPage(pageInfo, content, success_callback, error_callback) {
   const data = {
     parent: {
       type: "database_id",
       database_id: await getOption("notion_database_id"),
     },
     properties: {
+      Link: {
+        type: "url",
+        url: pageInfo.url,
+      },
       From: {
         type: "select",
         select: { name: pageInfo.from },
@@ -69,15 +78,16 @@ export async function addPage(pageInfo, content) {
         },
       },
     },
-    // children: markdownToBlocks()
     children: [
-      ...markdownToBlocks("## 描述"),
-      ...markdownToBlocks(pageInfo.description),
+      // ...markdownToBlocks("## 描述"),
+      // ...markdownToBlocks(pageInfo.description),
       ...markdownToBlocks("## 代码"),
-      ...markdownToBlocks("```" + pageInfo.code_language + "\n" + pageInfo.code + "```"),
+      ...markdownToBlocks(
+        "```" + pageInfo.code_language + "\n" + pageInfo.code + "```"
+      ),
       ...markdownToBlocks("## 思路"),
       ...markdownToBlocks(content || "TBD"),
-    ]
+    ],
   };
 
   const settings = {
@@ -93,11 +103,11 @@ export async function addPage(pageInfo, content) {
     },
     processData: false,
     data: JSON.stringify(data),
+    success: success_callback || ((response) => {console.log("added page", response);}),
+    error: error_callback || ((error) => {console.log("error added page", error);}),
   };
 
-  console.log(data, settings);
+  console.log("ready to add page", data, settings);
 
-  $.ajax(settings).done(function (response) {
-    console.log("notion add page", response);
-  });
+  $.ajax(settings);
 }

@@ -13,7 +13,7 @@ const config = (env, argv) => merge(common, {
     background: PATHS.src + '/background.js',
     acwing: PATHS.src + '/acwing.js',
     config: PATHS.src + '/config.js',
-    notion: PATHS.src + '/notion.js',
+    notion: PATHS.src + '/notion.js'
   },
   devtool: argv.mode === 'production' ? false : 'source-map'
 });

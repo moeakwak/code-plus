@@ -2,4 +2,6 @@ export const config = {
   notion_database_id: "xxx",
   notion_secret: "secret_xxx",
   cors_proxy: "http://localhost:7700/",
+  add_description_to_page: false,
+  auto_jump_to_notion_page: true
 };

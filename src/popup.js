@@ -1,46 +1,35 @@
 "use strict";
 
 import $ from "jquery";
-import { createPage } from "./notion.js";
+import { getOption } from "./utils";
+import { createPage } from "./notion";
 
 $("#send").on("click", async () => {
   // retrieveDatabase();
   let info = JSON.parse($("#info").text());
+  let idea = $("#idea").val();
   let status = $("input[name='status']:checked").val();
   if (status == "other") status = $("input[name='status-other']").val();
   info.status = status;
   console.log("Codeplus info", info);
+  console.log("Codeplus idea", idea);
   $("#result").text("Please wait...");
   await createPage(
     info,
-    "TBD",
-    (response) => {
+    idea,
+    async (response) => {
       console.log("call createPage success", response);
-      $("#result").html(`<div>Success!
+      $("#result").html(`<div><p style="color:green">Success!</p>
         <p>id: ${response.id}</p>
         <p>url: <a href="${response.url}">${response.url}</a></p></div>`);
+      if ((await chrome.storage.local.get(["auto_jump_to_notion_page"]))["auto_jump_to_notion_page"]) {
+        window.location.href = response.url;
+      }
     },
     (error) => {
-      console.log(error);
-      $("#result").text("call createPage error!");
+      $("#result").html(`<p style="color:red">${error.info}</p>`);
     }
   );
-  // chrome.runtime.sendMessage(
-  //   {
-  //     type: "add-page",
-  //     info,
-  //   },
-  //   (response) => {
-  //     console.log("popup output result", response);
-  //     if (response.type == "error") {
-  //       $("#result").text("error occured: " + response.error.statusText);
-  //     } else {
-  //       $("#result").html(`<div>Success!
-  //       <p>id: ${response.page.id}</p>
-  //       <p>url: <a href="${response.page.url}">${response.page.url}</a></p></div>`);
-  //     }
-  //   }
-  // );
 });
 
 // receive info json

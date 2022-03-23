@@ -1,7 +1,7 @@
 {
-  "name": "code-plus",
-  "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "name": "code-plus-extension",
+  "version": "0.1.1",
+  "description": "record your programming to notion",
   "private": true,
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",

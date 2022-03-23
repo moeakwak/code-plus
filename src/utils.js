@@ -1,5 +1,6 @@
-import TurndownService from 'turndown';
 import $ from "jquery";
+
+import TurndownService from "turndown";
 
 export function html2md(html, from) {
   let turndownService = new TurndownService();
@@ -54,6 +55,6 @@ export function html2md(html, from) {
       },
     });
   }
-  
+
   return turndownService.turndown(html);
 }

@@ -9,7 +9,6 @@ const PATHS = require('./paths');
 const config = (env, argv) => merge(common, {
   entry: {
     popup: PATHS.src + '/popup.js',
-    contentScript: PATHS.src + '/contentScript.js',
     background: PATHS.src + '/background.js',
     acwing: PATHS.src + '/acwing.js',
     config: PATHS.src + '/config.js',

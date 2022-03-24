@@ -21,7 +21,7 @@ export async function retrieveDatabase() {
     method: "GET",
     headers: {
       Accept: "application/json",
-      "Notion-Version": "2022-02-22",
+      "Notion-Version": "<<latestNotionVersion>>",
       Authorization: "Bearer " + (await getOption("notion_secret")),
     },
   };
@@ -30,6 +30,26 @@ export async function retrieveDatabase() {
     console.log(response); // This contains useful information like Database properties
   });
 }
+
+export async function retrievePage(pageId) {
+  const settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://api.notion.com/v1/pages/" + pageId,
+    "method": "GET",
+    "headers": {
+      "Accept": "application/json",
+      "Notion-Version": "<<latestNotionVersion>>"
+    },
+    "Authorization": "Bearer " + (await getOption("notion_secret")),
+  };
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+}
+
+
 
 /**
  * call notion api to create a new page
@@ -50,12 +70,12 @@ export async function createPage(
     );
   console.log("```" + pageInfo.code_language + "\n" + pageInfo.code + "```");
   page_blocks = page_blocks.concat(
+    markdownToBlocks("## 思路"),
+    markdownToBlocks(content || ""),
     markdownToBlocks("## 代码"),
     markdownToBlocks(
       "```" + pageInfo.code_language + "\n" + pageInfo.code + "```"
     ),
-    markdownToBlocks("## 思路"),
-    markdownToBlocks(content || "TBD")
   );
 
   const data = {

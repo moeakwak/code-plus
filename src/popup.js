@@ -1,18 +1,17 @@
 "use strict";
 
 import $ from "jquery";
-import { getOption } from "./utils";
-import { createPage } from "./notion";
+import { createPage, retrievePage } from "./notion";
 
 $("#send").on("click", async () => {
-  // retrieveDatabase();
+  retrievePage();
   let info = JSON.parse($("#info").text());
-  let idea = $("#idea").val();
+  let idea = "";
+  // let idea = $("#idea").val();
   let status = $("input[name='status']:checked").val();
   if (status == "other") status = $("input[name='status-other']").val();
   info.status = status;
   console.log("Codeplus info", info);
-  console.log("Codeplus idea", idea);
   $("#result").text("Please wait...");
   await createPage(
     info,

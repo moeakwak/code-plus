@@ -1,8 +1,8 @@
 # Code Plus
 
-CodePlus is a chrome extension to help you save programming record to Notion.
+CodePlus is a chrome extension to help you save programming record as Notion pages.
 
-CodePlus plan to support these platforms:
+CodePlus plans to support these platforms:
 
 - AcWing (available at https://www.acwing.com/problem/content/*/)
 - LeetCode (Not implemented yet)
@@ -14,7 +14,16 @@ CodePlus plan to support these platforms:
 
 ### Notion integration
 
-Follow [Notion's instructions](https://developers.notion.com/docs/getting-started) to add a new integration.
+Follow [Notion's instructions](https://developers.notion.com/docs/getting-started) to add a new integration, and record your database_id and secret.
+
+The database's schema should contain these:
+- Link (url)
+- From (select)
+- Title (title)
+- Data (date)
+- Status (select)
+- Difficulty (select)
+- Tags (multi-select)
 
 ### configuration
 
@@ -24,35 +33,30 @@ Move and edit `src/config.js.template` as `src/config.js`.
 
 ### CORS proxy
 
-Notion API doesn't support CORS, so you need to use a CORS proxy.
+<del>Notion API doesn't support CORS, so you need to use a CORS proxy.</del>
+
+**Note**: It seems Notion API has been updated and you can use it without CORS proxy!
 
 This repo contains a simple one using cors-anywhere at `proxy/server.js`.
 
 ## build and install
 
 1. clone with submodule (add `--recursive` flag)
-2. compile `lib/martian`
+2. install dependency
 ```
-cd lib/martian
-npm install
-npm run compile
-```
-3. install dependency
-```
-cd ../..
 npm install
 ```
-4. build and watch
+3. build
 ```
-npm run watch
+npm run build
 ```
 
-Besides, you need to run CORS proxy in a new terminal:
+Optionally, you may need to run CORS proxy in a new terminal (depends on whether you can use with CORS proxy):
 ```
 npm run proxy
 ```
 
-To install the extension, load the `build folder`.
+Last, to install the extension, load the `build` folder.
 
 For more details, see [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)'s description.
 

@@ -22,6 +22,16 @@ chrome.action.onClicked.addListener((tab) => {
       target: { tabId: tab.id },
     });
   }
+  // for leetcode-cn
+  let leetcodecn_pattern = /.*leetcode-cn.com\/problems\/[^\/]*\/$/;
+  if (leetcodecn_pattern.test(tab.url)) {
+    console.log("background: inject to", tab);
+    // inject code to use monaco api
+    chrome.scripting.executeScript({
+      files: ["leetcode-cn.js"],
+      target: { tabId: tab.id },
+    });
+  }
 });
 
 let latest_info = {};

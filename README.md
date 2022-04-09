@@ -1,22 +1,22 @@
 # Code Plus
 
-CodePlus is a chrome extension to help you save programming record as Notion pages.
+CodePlus 是一个用于快速保存算法刷题记录到 Notion 笔记的插件，目前支持以下平台：
 
-CodePlus plans to support these platforms:
+- [x] AcWing (https://www.acwing.com/problem/content/*/)
+- [x] LeetCode CN (https://leetcode-cn.com/problems/*/)
+- [ ] Codeforces
+- [ ] CCF cspro
+- [ ] Luogu
 
-- AcWing (available at https://www.acwing.com/problem/content/*/)
-- LeetCode (Not implemented yet)
-- Codeforces (Not implemented yet)
-- CCF cspro (Not implemented yet)
-- Luogu (Not implemented yet)
+## 使用说明
 
-## Start Up
+请注意：目前 CodePlus 仅是一个原型，极其简陋也没有 option 页面，所以需要自行修改代码、自行编译才可用。后续会考虑完善。
 
-### Create Notion Integration
+### 创建 Notion 集成
 
-Follow [Notion's instructions](https://developers.notion.com/docs/getting-started) to add a new integration, and record your database_id and secret.
+1. 参考 [Notion 官方说明](https://developers.notion.com/docs/getting-started) 添加一个 integration，记好 secret；
 
-The database should contain these properties at lease:
+2. 创建一个页面放数据库，数据库需要有如下 proprieties（名称必须分毫不差，括号内的是属性的类型）：
 
 - Link (url)
 - From (select)
@@ -26,45 +26,35 @@ The database should contain these properties at lease:
 - Difficulty (select)
 - Tags (multi-select)
 
-### Configuration
+之后点击 share，然后拷贝链接，链接后面一段就是数据库 id（如果你不明白请看上面文档）。
 
-Currently option page is not finished, so you need to configure notion API mannually.
+此外，share 中需要授权给你自己创建的 integration.
 
-Move and edit `src/config.js.template` as `src/config.js`.
+### 配置插件
 
-### \* CORS Proxy
+首先克隆仓库，由于含有子仓库，你需要添加 `--recursive` 选项。
+
+在克隆仓库后，将文件 `src/config.js.template` 复制并更名为 `src/config.js`，并修改其中的 secret 以及 database_id 为你自己的。
+
+### CORS Proxy
 
 <del>Notion API doesn't support CORS, so you need to use a CORS proxy. This repo contains a simple one using cors-anywhere at `proxy/server.js`.</del>
 
-**Note**: It seems Notion API has been updated and you can use without CORS proxy!
+**Note**: 现在不用管代理了，直接可以使用，没有跨站的麻烦
 
 ## Build and Install
 
-1. clone with submodule (add `--recursive` flag)
-2. install dependency
+运行：
 
 ```
 npm install
-```
-
-3. build
-
-```
 npm run build
 ```
 
-Optionally, you may need to run CORS proxy in a new terminal:
-
-```
-npm run proxy
-```
-
-Finally, to install the extension, load the `build` folder.
+之后在浏览器插件管理页面打开开发者模式，选择加载已解压的插件，选择项目内的 build 目录。
 
 For more details, see [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)'s description.
 
-## How to use
+## 使用方法
 
-Click the icon action. If nothing happened, then current page is not supported.
-
-Check the console for more info if something goes wrong.
+点击图表即可。没有反应的话说明不支持当前页面。

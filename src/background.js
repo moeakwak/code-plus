@@ -27,10 +27,23 @@ chrome.action.onClicked.addListener((tab) => {
   if (leetcodecn_pattern.test(tab.url)) {
     console.log("background: inject to", tab);
     // inject code to use monaco api
-    chrome.scripting.executeScript({
-      files: ["leetcode-cn.js"],
-      target: { tabId: tab.id },
-    });
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: tab.id },
+        world: "MAIN",
+        func: () => {
+          let fullcode = monaco.editor.getModels()[0].getValue();
+          document.body.setAttribute("data-fullcode", fullcode);
+          // console.log("get code", fullcode);
+        },
+      },
+      () => {
+        chrome.scripting.executeScript({
+          files: ["leetcode-cn.js"],
+          target: { tabId: tab.id },
+        });
+      }
+    );
   }
 });
 

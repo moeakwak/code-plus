@@ -16,16 +16,7 @@ let title = full_title.match(title_regex)[2].trim();
 // let description = html2md($("div[class^='content']").html(), from);
 let description = $("div[class^='content']").html();
 
-// get full code using monaco api
-// inject script and visit result by get body data-fullcode attr value
-// using file to avoid inline script safety block
-var s = document.createElement("script");
-s.src = chrome.runtime.getURL("leetcode-cn-inject.js");
-s.onload = function () {
-  this.remove();
-};
-(document.head || document.documentElement).appendChild(s);
-
+// already get code in background.js
 let code = document.body.getAttribute("data-fullcode");
 
 let code_language = $("#lang-select").children("span").text().toLowerCase();

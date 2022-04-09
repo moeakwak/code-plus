@@ -13,7 +13,6 @@ const config = (env, argv) =>
       background: PATHS.src + "/background.js",
       acwing: PATHS.src + "/acwing.js",
       "leetcode-cn": PATHS.src + "/leetcode-cn.js",
-      "leetcode-cn-inject": PATHS.src + "/leetcode-cn-inject.js",
       config: PATHS.src + "/config.js",
       notion: PATHS.src + "/notion.js",
     },

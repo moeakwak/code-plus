@@ -32,7 +32,7 @@ CodePlus 是一个用于快速保存算法刷题记录到 Notion 笔记的 Chrom
 
   如下：
 
-  <img src="assets//properties.png" alt="properties" style="zoom:40%;" />
+  <img src="assets//properties.png" alt="properties" style="width:200px;" />
 
 2. 参考 [Notion 官方说明](https://developers.notion.com/docs/getting-started#getting-started) 完成 step 1 ~ step 2 的步骤，记好你的 database id，并且授权给你自己创建的 integration.
 
@@ -73,4 +73,4 @@ For more details, see [Chrome Extension CLI](https://github.com/dutiyesh/chrome-
 
 创建的页面效果如下：
 
-<img src="assets//notion-page.png" alt="notion-page.png" style="zoom: 50%;" />
+<img src="assets//notion-page.png" alt="notion-page.png" style="width: 500px;" />

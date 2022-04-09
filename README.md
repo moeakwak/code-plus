@@ -16,7 +16,7 @@ CodePlus 是一个用于快速保存算法刷题记录到 Notion 笔记的插件
 
 1. 参考 [Notion 官方说明](https://developers.notion.com/docs/getting-started) 添加一个 integration，记好 secret；
 
-2. 创建一个页面放数据库，数据库需要有如下 proprieties（名称必须分毫不差，括号内的是属性的类型）：
+2. 创建一个页面放数据库，数据库需要有如下 properties（名称必须分毫不差，括号内的是属性的类型）：
 
 - Link (url)
 - From (select)
@@ -36,12 +36,6 @@ CodePlus 是一个用于快速保存算法刷题记录到 Notion 笔记的插件
 
 在克隆仓库后，将文件 `src/config.js.template` 复制并更名为 `src/config.js`，并修改其中的 secret 以及 database_id 为你自己的。
 
-### CORS Proxy
-
-<del>Notion API doesn't support CORS, so you need to use a CORS proxy. This repo contains a simple one using cors-anywhere at `proxy/server.js`.</del>
-
-**Note**: 现在不用管代理了，直接可以使用，没有跨站的麻烦
-
 ## Build and Install
 
 运行：
@@ -57,4 +51,4 @@ For more details, see [Chrome Extension CLI](https://github.com/dutiyesh/chrome-
 
 ## 使用方法
 
-点击图表即可。没有反应的话说明不支持当前页面。
+点击图标即可。没有反应的话说明不支持当前页面。

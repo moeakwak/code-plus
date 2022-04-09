@@ -15,7 +15,6 @@ export async function retrieveDatabase() {
     async: true,
     crossDomain: true,
     url:
-      (await getOption("cors_proxy")) +
       "https://api.notion.com/v1/databases/" +
       (await getOption("notion_database_id")),
     method: "GET",
@@ -33,23 +32,21 @@ export async function retrieveDatabase() {
 
 export async function retrievePage(pageId) {
   const settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://api.notion.com/v1/pages/" + pageId,
-    "method": "GET",
-    "headers": {
-      "Accept": "application/json",
-      "Notion-Version": "<<latestNotionVersion>>"
+    async: true,
+    crossDomain: true,
+    url: "https://api.notion.com/v1/pages/" + pageId,
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Notion-Version": "<<latestNotionVersion>>",
     },
-    "Authorization": "Bearer " + (await getOption("notion_secret")),
+    Authorization: "Bearer " + (await getOption("notion_secret")),
   };
-  
+
   $.ajax(settings).done(function (response) {
     console.log(response);
   });
 }
-
-
 
 /**
  * call notion api to create a new page
@@ -75,7 +72,7 @@ export async function createPage(
     markdownToBlocks("## 代码"),
     markdownToBlocks(
       "```" + pageInfo.code_language + "\n" + pageInfo.code + "```"
-    ),
+    )
   );
 
   const data = {
@@ -125,14 +122,13 @@ export async function createPage(
   const settings = {
     async: true,
     crossDomain: true,
-    url: (await getOption("cors_proxy")) + "https://api.notion.com/v1/pages",
+    url: "https://api.notion.com/v1/pages",
     method: "POST",
     headers: {
       Accept: "application/json",
       "Notion-Version": "2022-02-22",
       "Content-Type": "application/json",
       Authorization: "Bearer " + (await getOption("notion_secret")),
-      ...((await getOption("cors_proxy_extra_header")) || {})
     },
     processData: false,
     data: JSON.stringify(data),

@@ -71,7 +71,7 @@ export async function createPage(
     markdownToBlocks(content || ""),
     markdownToBlocks("## 代码"),
     markdownToBlocks(
-      "```" + pageInfo.code_language + "\n" + pageInfo.code + "```"
+      "```" + pageInfo.code_language + "\n" + pageInfo.code + "\n```"
     )
   );
 

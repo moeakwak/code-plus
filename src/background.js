@@ -11,25 +11,24 @@ chrome.runtime.onInstalled.addListener(() => {
 
 // inject content script when click the icon
 chrome.action.onClicked.addListener((tab) => {
-  // for acwing
   let acwing_pattern =
     /.*www.acwing.com\/problem\/content(\/description)?\/(\d+).*/;
+  let leetcodecn_pattern = /.*leetcode-cn.com\/problems\/[^\/]*\/$/;
+
   if (acwing_pattern.test(tab.url)) {
+    // for acwing
     console.log("background: inject to", tab);
     chrome.scripting.executeScript({
       files: ["acwing.js"],
       target: { tabId: tab.id },
     });
-  }
-  // for leetcode-cn
-  let leetcodecn_pattern = /.*leetcode-cn.com\/problems\/[^\/]*\/$/;
-  if (leetcodecn_pattern.test(tab.url)) {
+  } else if (leetcodecn_pattern.test(tab.url)) {
+    // for leetcode-cn
     console.log("background: inject to", tab);
-    // inject code to use monaco api
     chrome.scripting.executeScript(
       {
         target: { tabId: tab.id },
-        world: "MAIN",
+        world: "MAIN", // inject code to use monaco api
         func: () => {
           let fullcode = monaco.editor.getModels()[0].getValue();
           document.body.setAttribute("data-fullcode", fullcode);
@@ -43,6 +42,8 @@ chrome.action.onClicked.addListener((tab) => {
         });
       }
     );
+  } else {
+    console.warn("CodePlus 不支持当前页面");
   }
 });
 

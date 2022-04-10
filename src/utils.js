@@ -3,8 +3,8 @@ import $ from "jquery";
 import TurndownService from "turndown";
 
 export function html2md(html, from) {
-  console.log("html2md", html);
-  if (from == "acwing") return acwing_html2md(html);
+  // console.log("html2md", html, from);
+  if (from == "AcWing") return acwing_html2md(html);
   else if (from == "Leetcode") return leetcode_html2md(html);
   else return naive_html2md(html);
 }
@@ -16,9 +16,12 @@ function acwing_html2md(html) {
   turndownService.addRule("pre", {
     filter: "pre",
     replacement: function (content, node) {
-      let t = $(node).attr("class").split(/\s+/).slice(-1);
-      if (t == "hljs") t = "";
-      return "```" + t + "\n" + content.trim() + "\n```";
+      let t = null;
+      if ($(node).attr("class")) {
+        t = $(node).attr("class").split(/\s+/).slice(-1);
+        if (t == "hljs") t = "";
+      }
+      return "```" + (t || "") + "\n" + content.trim() + "\n```";
     },
   });
 

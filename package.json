@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",
     "build": "webpack --mode=production --config config/webpack.config.js",
-    "proxy": "node proxy/server.js"
+    "release": "npm run build && zip -r code-plus-extension-${npm_package_version}-release.zip build"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^6.4.1",

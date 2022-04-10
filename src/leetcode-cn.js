@@ -13,8 +13,7 @@ let full_title = $("[data-cypress='QuestionTitle']").text().trim();
 let title_regex = /(.+)\.(.*)/;
 let id = full_title.match(title_regex)[1].trim();
 let title = full_title.match(title_regex)[2].trim();
-// let description = html2md($("div[class^='content']").html(), from);
-let description = $("div[class^='content']").html();
+let description = html2md($("div[class^='content']").html(), from);
 
 // already get code in background.js
 let code = document.body.getAttribute("data-fullcode");

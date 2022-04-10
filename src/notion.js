@@ -65,7 +65,6 @@ export async function createPage(
       markdownToBlocks("## 描述"),
       markdownToBlocks(pageInfo.description)
     );
-  console.log("```" + pageInfo.code_language + "\n" + pageInfo.code + "```");
   page_blocks = page_blocks.concat(
     markdownToBlocks("## 思路"),
     markdownToBlocks(content || ""),
@@ -139,7 +138,7 @@ export async function createPage(
       }),
     error: (error) => {
       console.error("error added page", error);
-      error.info = `${settings.url}: Failed to create page! Check CORS proxy. See console for more info.`;
+      error.info = `${settings.url}: Failed to create page! See console for more info.`;
       if (error_callback) error_callback(error);
     },
   };

@@ -1,14 +1,13 @@
 "use strict";
 
-import { config } from "./config.js";
-import { createPage } from "./notion.js";
+// set Notion config at first install
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.runtime.openOptionsPage();
+});
 
-// TODO: set Notion config at first install
-chrome.storage.local.set(config, () =>
-  console.log("background: ready", config)
-);
-
-// chrome.runtime.onInstalled.addListener(() => {});
+// chrome.storage.local.set(config, () =>
+//   console.log("background: ready", config)
+// );
 
 // inject content script when click the icon
 chrome.action.onClicked.addListener((tab) => {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>CodePlus</title>
+  </head>
+  <body>
+    <div>
+      <p>
+        是否在创建完成后自动跳转到 notion：
+        <input type="radio" name="auto_jump_to_notion_page" value="true" />是
+        <input type="radio" name="auto_jump_to_notion_page" value="false" />否
+      </p>
+      <p>
+        是否添加题目描述到页面中：
+        <input type="radio" name="add_description_to_page" value="true" />是
+        <input type="radio" name="add_description_to_page" value="false" />否
+      </p>
+      <p>
+        notion_database_id:
+        <input type="text" id="notion_database_id" style="width: 400px" />
+      </p>
+      <p>
+        notion_secret:
+        <input type="text" id="notion_secret" style="width: 400px" />
+      </p>
+    </div>
+
+    <button id="save">保存设置</button>
+
+    <div id="status"></div>
+
+    <script src="options.js"></script>
+  </body>
+</html>

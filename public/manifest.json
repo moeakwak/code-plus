@@ -12,17 +12,13 @@
   "background": {
     "service_worker": "background.js"
   },
+  "options_page": "options.html",
   "action": {
     "default_title": "CodePlus"
     // ,
     // "default_popup": "popup.html"
   },
-  "permissions": [
-    "storage",
-    "activeTab",
-    "scripting",
-    "tabs"
-  ],
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
   "host_permissions": ["https://*/*"]
   // ,
   // "content_scripts": [

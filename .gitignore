@@ -12,3 +12,7 @@ npm-debug.log*
 config.json
 
 size-plugin.json
+
+*.zip
+*.pem
+*.crx

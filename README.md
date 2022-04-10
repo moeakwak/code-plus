@@ -1,6 +1,6 @@
 # Code Plus
 
-CodePlus 是一个用于快速保存算法刷题记录到 Notion 笔记的 Chrome 浏览器插件，目前支持以下平台（括号内为插件将会激活的链接，不匹配的链接点击无响应）：
+CodePlus 是一个用于快速保存算法刷题记录到 Notion 笔记的 Chrome 浏览器插件，目前支持以下部分平台（括号内为插件将会激活的链接，不匹配的链接点击无响应）：
 
 - [x] AcWing (https://www.acwing.com/problem/content/1/)
 - [x] LeetCode CN (https://leetcode-cn.com/problems/two-sum/)

@@ -11,10 +11,9 @@ chrome.storage.local.get(
     "notion_secret",
   ],
   (items) => {
-    $("#options").text(
-      "设置选项：\n" +
-        JSON.stringify(items, null, 2) +
-        "\n若有误，请去插件设置页面修改"
+    $("#options").html(
+      `<p>插件选项如下：（若有误，请去插件设置页面修改）</p>
+       <p>${JSON.stringify(items, null, 2)}</p>`
     );
   }
 );

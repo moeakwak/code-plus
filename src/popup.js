@@ -20,7 +20,7 @@ chrome.storage.local.get(
 
 $("#send").on("click", async () => {
   retrievePage();
-  let info = JSON.parse($("#info").text());
+  let info = JSON.parse($("#info").val());
   let idea = "";
   // let idea = $("#idea").val();
   let status = $("input[name='status']:checked").val();

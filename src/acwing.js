@@ -15,9 +15,16 @@ let full_title = $("div[class='nice_font problem-content-title']")
   .trim();
 let id = full_title.match(title_regex)[1].trim();
 let title = full_title.match(title_regex)[2].trim();
+
 let description = html2md($("[data-tab='preview-tab-content']").html(), from);
+// for ... $ \n $ ..., turn it to \n\n to avoid wrong format
+description = description.replaceAll(/\$( *)\n( *)\$/gi, "$$$1\n\n$2$$");
+
 let code = document.body.getAttribute("data-fullcode");
-let code_language = $("select[name='language']").children(":selected").text().toLowerCase();
+let code_language = $("select[name='language']")
+  .children(":selected")
+  .text()
+  .toLowerCase();
 let tags = [];
 $("div.problem-algorithm-tag-field")
   .children("a")

@@ -3,6 +3,7 @@
 
 # production
 /build
+/code-plus-build
 
 # misc
 .DS_Store

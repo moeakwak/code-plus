@@ -18,10 +18,24 @@ chrome.action.onClicked.addListener((tab) => {
   if (acwing_pattern.test(tab.url)) {
     // for acwing
     console.log("background: inject to", tab);
-    chrome.scripting.executeScript({
-      files: ["acwing.js"],
-      target: { tabId: tab.id },
-    });
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: tab.id },
+        world: "MAIN", // inject code to use monaco api
+        func: () => {
+          let fullcode = ace
+            .edit(document.getElementById("code_editor"))
+            .getValue();
+          document.body.setAttribute("data-fullcode", fullcode);
+        },
+      },
+      () => {
+        chrome.scripting.executeScript({
+          files: ["acwing.js"],
+          target: { tabId: tab.id },
+        });
+      }
+    );
   } else if (leetcodecn_pattern.test(tab.url)) {
     // for leetcode-cn
     console.log("background: inject to", tab);

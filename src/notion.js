@@ -60,11 +60,12 @@ export async function createPage(
   error_callback
 ) {
   let page_blocks = [];
-  if (await getOption("add_description_to_page"))
-    page_blocks = page_blocks.concat(
-      markdownToBlocks("## 描述"),
-      markdownToBlocks(pageInfo.description)
-    );
+  if (await getOption("add_description_to_page")) {
+    page_blocks = markdownToBlocks("## 描述");
+    // toggle heading 2
+    page_blocks[0]['heading_2']['children'] = markdownToBlocks(pageInfo.description);
+  }
+  // console.log(page_blocks);
   page_blocks = page_blocks.concat(
     markdownToBlocks("## 思路"),
     markdownToBlocks(content || ""),

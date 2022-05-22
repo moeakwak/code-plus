@@ -14,10 +14,11 @@ chrome.action.onClicked.addListener((tab) => {
   let acwing_pattern =
     /.*www.acwing.com\/problem\/content(\/description)?\/(\d+).*/;
   let leetcodecn_pattern = /.*leetcode-cn.com\/problems\/[^\/]*\/$/;
+  let matiji_pattern = /.*matiji.net\/.*\/$/;
 
   if (acwing_pattern.test(tab.url)) {
     // for acwing
-    console.log("background: inject to", tab);
+    console.log("background: acwing inject to", tab);
     chrome.scripting.executeScript(
       {
         target: { tabId: tab.id },
@@ -38,7 +39,7 @@ chrome.action.onClicked.addListener((tab) => {
     );
   } else if (leetcodecn_pattern.test(tab.url)) {
     // for leetcode-cn
-    console.log("background: inject to", tab);
+    console.log("background: leetcode inject to", tab);
     chrome.scripting.executeScript(
       {
         target: { tabId: tab.id },
@@ -56,6 +57,13 @@ chrome.action.onClicked.addListener((tab) => {
         });
       }
     );
+  } else if (tab.url.indexOf("matiji.net") != -1) {
+    // for matiji
+    console.log("background: matiji inject to", tab);
+    chrome.scripting.executeScript({
+      files: ["matiji.js"],
+      target: { tabId: tab.id },
+    });
   } else {
     console.warn("CodePlus 不支持当前页面");
   }

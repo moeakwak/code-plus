@@ -27,7 +27,7 @@ let code_language = $("select[name='language']")
   .toLowerCase();
 let tags = [];
 $("div.problem-algorithm-tag-field")
-  .children("a")
+  .children("span")
   .each(function () {
     tags.push($(this).text().trim());
   });

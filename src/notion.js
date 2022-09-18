@@ -4,6 +4,15 @@ import $ from "jquery";
 import { markdownToBlocks } from "../lib/martian";
 // TODO: markdownToBlocks support inline math
 
+function convertMarkdownToBlocks(markdown) {
+  const options = {
+    strictImageUrls: false,
+    nonInline: 'throw'
+  };
+  let blocks = markdownToBlocks(markdown, options);
+  return blocks;
+}
+
 async function getOption(key) {
   let result = await chrome.storage.local.get([key]);
   // console.log("getOption", result);
@@ -61,18 +70,25 @@ export async function createPage(
 ) {
   let page_blocks = [];
   if (await getOption("add_description_to_page")) {
-    page_blocks = markdownToBlocks("## 描述");
+    page_blocks = convertMarkdownToBlocks("## 描述");
     // toggle heading 2
-    page_blocks[0]['heading_2']['children'] = markdownToBlocks(pageInfo.description);
+    page_blocks[0]['heading_2']['children'] = convertMarkdownToBlocks(pageInfo.description);
   }
+
+  const codeBlock = convertMarkdownToBlocks(
+    "```" + pageInfo.code_language + "\n" + pageInfo.code + "\n```"
+  )
+  console.log(codeBlock)
+
+  // prevent style missing issue
+  delete codeBlock[0].code.rich_text[0].annotations;
+
   // console.log(page_blocks);
   page_blocks = page_blocks.concat(
-    markdownToBlocks("## 思路"),
-    markdownToBlocks(content || ""),
-    markdownToBlocks("## 代码"),
-    markdownToBlocks(
-      "```" + pageInfo.code_language + "\n" + pageInfo.code + "\n```"
-    )
+    convertMarkdownToBlocks("## 思路"),
+    convertMarkdownToBlocks(content || ""),
+    convertMarkdownToBlocks("## 代码"),
+    codeBlock
   );
 
   const data = {

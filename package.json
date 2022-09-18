@@ -1,6 +1,6 @@
 {
   "name": "code-plus-extension",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "save your programming record to notion",
   "private": true,
   "scripts": {

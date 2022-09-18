@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.action.onClicked.addListener((tab) => {
   let acwing_pattern =
     /.*www.acwing.com\/problem\/content(\/description)?\/(\d+).*/;
-  let leetcodecn_pattern = /.*leetcode-cn.com\/problems\/[^\/]*\/$/;
+  let leetcodecn_pattern = /.*leetcode.cn\/problems\/[^\/]*\/$/;
   let matiji_pattern = /.*matiji.net\/.*\/$/;
 
   if (acwing_pattern.test(tab.url)) {
